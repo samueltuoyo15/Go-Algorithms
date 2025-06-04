@@ -1,11 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
 // binary search perfoms an iterative binary searchon a sorted array! the array must be sorted
 // returns the index of the target if found, otherwise -1
 
-func binarySearch(arr []int, target int) int {
+func iterativeBinarySearch(arr []int, target int) int {
 	low := 0
 	high := len(arr) - 1
 
@@ -36,15 +39,18 @@ func main() {
 	var target int
 
 	// to get user input for target from the command line
-	fmt.Print("Enter the target value to search: ")
-	fmt.Scan(&target)
+	log.Print("Enter the target value to search: ")
+	_, err := fmt.Scan(&target)
+	if err != nil {
+		log.Fatal("failed to read input\n", err)
+	}
 
 	// call binary search function
-	index := binarySearch(arr, target)
+	index := iterativeBinarySearch(arr, target)
 
 	if index != -1 {
-		fmt.Printf("Target %d found at index %d\n", target, index)
+		log.Printf("Target %d found at index %d\n", target, index)
 	} else {
-		fmt.Printf("Target %d not found in the array \n", target)
+		log.Printf("Target %d not found in the array \n", target)
 	}
 }
